@@ -5,12 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.sloth.pinsplatform.Iprinter;
-import com.sloth.info_api.InfoConstant;
-import com.sloth.info_api.LoginRpc;
-import com.sloth.order.OrderActivity;
-import com.sloth.order.OrderConst;
-import com.sloth.order.OrderRpc;
 import com.sankuai.waimai.router.Router;
 
 import java.util.Optional;

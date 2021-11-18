@@ -46,11 +46,43 @@ dependencies {
     androidTestImplementation testDependencies.espresso
     androidTestImplementation testDependencies.mockitoCore
 
+    annotationProcessor thirdDependencies.wmRouterAnno
+
     api supportDependencies.appCompat
     api supportDependencies.design
 
     api thirdDependencies.wmRouter
-    annotationProcessor thirdDependencies.wmRouterAnno
+    api thirdDependencies.multidex
+    api thirdDependencies.rxJava2
+    api thirdDependencies.rxAndroid2
+    api thirdDependencies.greendao
+    api thirdDependencies.eventBus
+    api thirdDependencies.butterKnife
+    api thirdDependencies.exoplayer
+    api thirdDependencies.nineoldandroids
+    implementation thirdDependencies.gson
+    implementation thirdDependencies.logger
+    implementation thirdDependencies.xlog
+    implementation thirdDependencies.glide
+    implementation thirdDependencies.picasso
+    implementation thirdDependencies.zxing
+    implementation thirdDependencies.zxingCode
+    implementation supportDependencies.lifecycle
+    implementation thirdDependencies.retrofit
+    implementation thirdDependencies.converterGson
+    implementation thirdDependencies.adapterRxjava2
+    implementation thirdDependencies.okhttp
+    implementation thirdDependencies.okhttplog
+    implementation thirdDependencies.lottie
+    implementation thirdDependencies.SVGAPlayer
+    implementation thirdDependencies.protobufJava
+    implementation thirdDependencies.converterProtobuf
+    implementation thirdDependencies.protobufJsonFormat
+    implementation thirdDependencies.ijkplayerjava
+    implementation thirdDependencies.x5webview
+    implementation thirdDependencies.ffmpegRetriever
+    implementation thirdDependencies.ffmpegRtNative
+    implementation thirdDependencies.stream
 }
 repositories {
     mavenCentral()
