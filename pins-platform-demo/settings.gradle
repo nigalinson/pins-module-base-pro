@@ -1,0 +1,6 @@
+include ':platform'
+include ':info_api'
+include ':info'
+include ':order'
+include ':app'
+rootProject.name = "pins-platform"
