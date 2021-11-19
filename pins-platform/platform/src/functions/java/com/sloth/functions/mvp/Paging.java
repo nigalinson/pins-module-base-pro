@@ -1,6 +1,6 @@
 package com.sloth.functions.mvp;
 
-import com.rongyi.common.functions.http.options.APIInfos;
+import com.sloth.functions.http.options.APIInfos;
 
 /**
  * Author:    Carl

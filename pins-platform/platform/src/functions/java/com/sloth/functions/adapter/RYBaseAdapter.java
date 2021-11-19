@@ -2,12 +2,8 @@ package com.sloth.functions.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.rongyi.common.utils.AutoDispose;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -96,20 +92,6 @@ public abstract class RYBaseAdapter<VH extends RYBaseViewHolder<T>, T> extends R
      */
     public void addItem(T data) {
         addItem(data, mDataList.size());
-    }
-
-    /**
-     * 移除所有记录
-     * 常规使用中,移除内容后notify，马上又添加内容重新notify，容易导致绘制异常
-     * 因此调用 {@link this#clearItemsWithoutNotify()} } 进行不刷新的内容清除
-     */
-    @Deprecated
-    public void clearItems() {
-        int size = mDataList.size();
-        if (size > 0) {
-            mDataList.clear();
-            notifyItemRangeRemoved(0, size);
-        }
     }
 
     /**

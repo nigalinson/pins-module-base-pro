@@ -5,19 +5,19 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.rongyi.common.functions.image.LoadTarget;
-import com.rongyi.common.functions.image.Loader;
-import com.rongyi.common.functions.log.LogUtils;
-import com.rongyi.common.functions.storage.RYFileHelper;
+import com.sloth.functions.image.LoadTarget;
+import com.sloth.functions.image.Loader;
+import com.sloth.functions.image.RYImageLoader;
+import com.sloth.tools.util.FileUtils;
+import com.sloth.tools.util.LogUtils;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
+
 import java.io.File;
 import java.util.Arrays;
-
-import com.rongyi.common.functions.image.RYImageLoader.DefaultOptions;
 
 /**
  * Author:    Carl
@@ -176,7 +176,7 @@ public class PicassoLoader extends Loader {
             }
         }else{
             //未设置自定义策略，判断默认策略
-            if(DefaultOptions.diskStrategy == DefaultOptions.DISK_STRATEGY_NONE){
+            if(RYImageLoader.DefaultOptions.diskStrategy == RYImageLoader.DefaultOptions.DISK_STRATEGY_NONE){
                 requestCreator = requestCreator.memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE);
             }
         }
@@ -198,6 +198,6 @@ public class PicassoLoader extends Loader {
     }
 
     private boolean exist(String path){
-        return RYFileHelper.isFileExist(path);
+        return FileUtils.isFileExists(path);
     }
 }

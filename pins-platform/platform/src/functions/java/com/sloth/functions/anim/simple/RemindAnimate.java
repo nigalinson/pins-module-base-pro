@@ -3,8 +3,7 @@ package com.sloth.functions.anim.simple;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.view.View;
-
-import com.rongyi.common.animator.remind.repeat.RepeatTime;
+import com.sloth.functions.anim.simple.repeat.RepeatTime;
 
 /**
  * Author:    Carl

@@ -2,14 +2,12 @@ package com.sloth.functions.mvp;
 
 import android.content.Context;
 
-import com.rongyi.common.exception.strict.RyStrictMode;
-import com.rongyi.common.utils.ReflectUtils;
-
+import com.sloth.tools.util.LogUtils;
+import com.sloth.tools.util.ReflectUtils;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -87,9 +85,9 @@ public class RYBaseCase<V extends RYBaseView> {
             return (M) models.get(className);
         }
 
-        RyStrictMode.throwExceptionIfStrictMode("可以手动置入" + className + "，优化执行效率!");
+        LogUtils.d("halo", "可以手动置入" + className + "，优化执行效率!");
 
-        M ins = ReflectUtils.getIns(clz);
+        M ins = ReflectUtils.reflect(clz).get();
         ins.setContext(context);
         models.put(className, ins);
         return ins;

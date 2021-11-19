@@ -1,3 +1,9 @@
+include ':p-liulisho-download'
+include ':p-banner'
+include ':p-player'
+include ':p-barcode'
+include ':p-ffmpeg-mediainfo-retriever'
+include ':p-xlog'
 include ':platform'
 include ':app'
 rootProject.name = "pins-platform"

@@ -2,8 +2,8 @@ package com.sloth.functions.image;
 
 import android.content.Context;
 
-import com.rongyi.common.functions.image.impl.GlideLoader;
-import com.rongyi.common.functions.image.impl.PicassoLoader;
+import com.sloth.functions.image.impl.GlideLoader;
+import com.sloth.functions.image.impl.PicassoLoader;
 
 /**
  * Author:    Carl

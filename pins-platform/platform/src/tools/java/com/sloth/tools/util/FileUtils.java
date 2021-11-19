@@ -3,17 +3,12 @@ package com.sloth.tools.util;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StatFs;
 import android.text.TextUtils;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -1459,41 +1454,4 @@ public final class FileUtils {
         boolean onReplace(File srcFile, File destFile);
     }
 
-    /**
-     * Author:    Carl
-     * Version    V1.0
-     * Date:      2021/8/2 10:45
-     * Description:
-     * Modification  History:
-     * Date         	Author        		Version        	Description
-     * -----------------------------------------------------------------------------------
-     * 2021/8/2         Carl            1.0                    1.0
-     * Why & What is modified:
-     */
-    public static class BitmapUtils {
-
-        public static Bitmap compress(Bitmap b1){
-            return compress(b1, 0.3f, 0.3f);
-        }
-
-        public static Bitmap compress(Bitmap b1, float quality, float scale){
-            if(b1 == null){ return null; }
-            ByteArrayOutputStream opt = new ByteArrayOutputStream();
-            //采样率降低
-            b1.compress(Bitmap.CompressFormat.JPEG, (int) (100 * quality), opt);
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2;
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
-            Bitmap b2 = BitmapFactory.decodeStream(new ByteArrayInputStream(opt.toByteArray()), null, options);
-            Bitmap b3 = b2.copy(Bitmap.Config.RGB_565, true);
-            Matrix matrix = new Matrix();
-            matrix.setScale(scale, scale);
-            Bitmap b4 = Bitmap.createBitmap(b3, 0, 0, b3.getWidth(), b3.getHeight(), matrix, true);
-            b1.recycle();
-            b2.recycle();
-            b3.recycle();
-            return b4;
-        }
-
-    }
 }

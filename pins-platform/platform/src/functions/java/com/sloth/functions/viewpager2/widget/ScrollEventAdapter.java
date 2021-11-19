@@ -24,14 +24,13 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.lang.annotation.Retention;
 import java.util.Locale;
 
-import static com.rongyi.common.widget.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL;
-import static com.rongyi.common.widget.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING;
-import static com.rongyi.common.widget.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE;
-import static com.rongyi.common.widget.viewpager2.widget.ViewPager2.SCROLL_STATE_SETTLING;
+import static com.sloth.functions.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL;
+import static com.sloth.functions.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING;
+import static com.sloth.functions.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE;
+import static com.sloth.functions.viewpager2.widget.ViewPager2.SCROLL_STATE_SETTLING;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**

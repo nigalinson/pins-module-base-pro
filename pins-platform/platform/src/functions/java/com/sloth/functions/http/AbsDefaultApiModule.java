@@ -2,15 +2,13 @@ package com.sloth.functions.http;
 
 import android.text.TextUtils;
 
-import com.rongyi.common.BuildConfig;
-import com.rongyi.common.base.RYApplication;
-import com.rongyi.common.functions.log.LogUtils;
-import com.rongyi.common.utils.RYDeviceUtils;
-import com.rongyi.common.utils.RYNetworkInfoHelper;
+import com.sloth.tools.util.AppUtils;
+import com.sloth.tools.util.DeviceUtils;
+import com.sloth.tools.util.NetworkUtils;
+import com.sloth.tools.util.Utils;
 
 import java.io.File;
 import java.util.List;
-
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -32,17 +30,17 @@ public abstract class AbsDefaultApiModule extends BaseApiModule {
 
     @Override
     protected void initInterceptors(List<Interceptor> interceptors) {
-        String mac = RYNetworkInfoHelper.getMacAddress();
-        String androidId = RYDeviceUtils.androidId(RYApplication.getContext());
+        String mac = DeviceUtils.getMacAddress();
+        String androidId = DeviceUtils.getAndroidID();
 
         Interceptor requestInterceptor = chain -> {
             Request request = chain.request()
                     .newBuilder()
                     .addHeader("ua", "Android")
-                    .addHeader("appVersion", BuildConfig.VERSION_NAME)
+                    .addHeader("appVersion", AppUtils.getAppVersionName())
                     .addHeader("osVersion", android.os.Build.VERSION.RELEASE)
                     .addHeader("deviceType", android.os.Build.MODEL)
-                    .addHeader("netWork", RYNetworkInfoHelper.getCurrentNetType(RYApplication.getContext()))
+                    .addHeader("netWork", NetworkUtils.getNetworkType().name())
                     .addHeader("mac", TextUtils.isEmpty(mac) ? "UN_KNOWN" : mac)
                     .addHeader("ry_android_id", TextUtils.isEmpty(androidId) ? "UN_KNOWN" : androidId)
                     .build();
@@ -52,13 +50,13 @@ public abstract class AbsDefaultApiModule extends BaseApiModule {
         //云端响应头拦截器，用来配置缓存策略
         Interceptor rewriteCacheControlInterceptor = chain -> {
             Request request = chain.request();
-            if (!RYNetworkInfoHelper.isNetworkAvailable(RYApplication.getContext())) {
+            if (!NetworkUtils.isAvailable()) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();
             }
             Response originalResponse = chain.proceed(request);
-            if (RYNetworkInfoHelper.isNetworkAvailable(RYApplication.getContext())) {
+            if (NetworkUtils.isAvailable()) {
                 //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
                 String cacheControl = request.cacheControl().toString();
                 return originalResponse.newBuilder()
@@ -79,7 +77,7 @@ public abstract class AbsDefaultApiModule extends BaseApiModule {
 
     @Override
     protected Cache initCacheConfig(long cacheSize) {
-        File baseDir = RYApplication.getContext().getCacheDir();
+        File baseDir = Utils.getApp().getCacheDir();
         final File cacheDir = new File(baseDir, "HttpResponseCache");
         return new Cache(cacheDir, HTTP_RESPONSE_DISK_CACHE_MAX_SIZE);
     }

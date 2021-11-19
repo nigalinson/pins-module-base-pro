@@ -20,11 +20,10 @@ import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
-
 import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.rongyi.common.widget.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL;
+import static com.sloth.functions.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL;
 
 /**
  * Provides fake dragging functionality to {@link ViewPager2}.

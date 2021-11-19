@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,8 +40,11 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.sloth.functions.viewpager2.widget.ViewPager2;
+
 import java.util.Set;
-import static androidx.core.util.Preconditions.checkArgument;
+
 import static androidx.lifecycle.Lifecycle.State.RESUMED;
 import static androidx.lifecycle.Lifecycle.State.STARTED;
 import static androidx.recyclerview.widget.RecyclerView.NO_ID;
@@ -54,7 +58,7 @@ import static androidx.recyclerview.widget.RecyclerView.NO_ID;
  * re-usable container for a {@link Fragment} in later stages.
  * <li>{@link RecyclerView.Adapter#onBindViewHolder} we ask for a {@link Fragment} for the
  * position. If we already have the fragment, or have previously saved its state, we use those.
- * <li>{@link RecyclerView.Adapter#onAttachedToWindow} we attach the {@link Fragment} to a
+ * <li> we attach the {@link Fragment} to a
  * container.
  * <li>{@link RecyclerView.Adapter#onViewRecycled} we remove, save state, destroy the
  * {@link Fragment}.
@@ -125,7 +129,7 @@ public abstract class FragmentStateAdapter extends
     @CallSuper
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        checkArgument(mFragmentMaxLifecycleEnforcer == null);
+        assert mFragmentMaxLifecycleEnforcer == null;
         mFragmentMaxLifecycleEnforcer = new FragmentMaxLifecycleEnforcer();
         mFragmentMaxLifecycleEnforcer.register(recyclerView);
     }

@@ -3,9 +3,8 @@ package com.sloth.functions.mvp;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.rongyi.common.exception.strict.RyStrictMode;
-import com.rongyi.common.utils.ReflectUtils;
-
+import com.sloth.tools.util.LogUtils;
+import com.sloth.tools.util.ReflectUtils;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -78,9 +77,9 @@ public class RYBasePresenter<V extends RYBaseView> {
             return (C) cases.get(className);
         }
 
-        RyStrictMode.throwExceptionIfStrictMode("可以手动置入" + className + "，优化执行效率!");
+        LogUtils.d("halo","可以手动置入" + className + "，优化执行效率!");
 
-        C ins = ReflectUtils.getIns(clz);
+        C ins = ReflectUtils.reflect(clz).get();
         ins.setContext(mContext);
         ins.setView(mView);
         cases.put(className, ins);

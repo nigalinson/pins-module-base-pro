@@ -15,6 +15,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -48,6 +49,12 @@ dependencies {
     androidTestImplementation testDependencies.mockitoCore
 
     api project(':platform')
+    api project(':p-xlog')
+    api project(':p-ffmpeg-mediainfo-retriever')
+    api project(':p-barcode')
+    api project(':p-player')
+    api project(':p-banner')
+    api project(':p-liulisho-download')
 
     annotationProcessor thirdDependencies.wmRouterAnno
 }

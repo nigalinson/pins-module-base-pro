@@ -2,6 +2,8 @@ package com.sloth.tools.util;
 
 import androidx.collection.SimpleArrayMap;
 
+import com.sloth.tools.constant.RegexConstants;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,7 +81,7 @@ public final class RegexUtils {
      * @return {@code true}: yes<br>{@code false}: no
      */
     public static boolean isFromAnyOfEmailProviders(String email, String[] emailProviders) {
-        return com.blankj.utilcode.util.ArrayUtils.contains(emailProviders, extractEmailProvider(email));
+        return ArrayUtils.contains(emailProviders, extractEmailProvider(email));
     }
     
     

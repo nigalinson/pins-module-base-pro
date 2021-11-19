@@ -30,6 +30,10 @@ public final class StringUtils {
         return s == null || s.length() == 0;
     }
 
+    public static boolean notEmpty(final CharSequence s) {
+        return !isEmpty(s);
+    }
+
     /**
      * Return whether the string is null or whitespace.
      *
@@ -38,6 +42,10 @@ public final class StringUtils {
      */
     public static boolean isTrimEmpty(final String s) {
         return (s == null || s.trim().length() == 0);
+    }
+
+    public static boolean notTrimEmpty(final String s) {
+        return !isTrimEmpty(s);
     }
 
     /**

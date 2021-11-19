@@ -3,8 +3,10 @@ package com.sloth.functions.image.impl;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
@@ -18,12 +20,13 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
-import com.rongyi.common.functions.image.LoadTarget;
-import com.rongyi.common.functions.image.Loader;
-import com.rongyi.common.functions.log.LogUtils;
-import com.rongyi.common.functions.storage.RYFileHelper;
+import com.sloth.functions.image.LoadTarget;
+import com.sloth.functions.image.Loader;
+import com.sloth.functions.image.RYImageLoader;
+import com.sloth.tools.util.FileUtils;
+import com.sloth.tools.util.LogUtils;
+
 import java.io.File;
-import com.rongyi.common.functions.image.RYImageLoader.DefaultOptions;
 
 /**
  * Author:    Carl
@@ -184,7 +187,7 @@ public class GlideLoader extends Loader {
             requestBuilder = requestBuilder.diskCacheStrategy((DiskCacheStrategy) diskStrategy);
         }else{
             //未设置自定义策略，判断默认策略
-            if(DefaultOptions.diskStrategy == DefaultOptions.DISK_STRATEGY_NONE){
+            if(RYImageLoader.DefaultOptions.diskStrategy == RYImageLoader.DefaultOptions.DISK_STRATEGY_NONE){
                 requestBuilder = requestBuilder.diskCacheStrategy(DiskCacheStrategy.NONE);
             }
         }
@@ -221,6 +224,6 @@ public class GlideLoader extends Loader {
     }
 
     private boolean exist(String path){
-        return RYFileHelper.isFileExist(path);
+        return FileUtils.isFileExists(path);
     }
 }

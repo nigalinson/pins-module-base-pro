@@ -54,12 +54,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
 
-import com.rongyi.common.R;
-import com.rongyi.common.functions.log.LogUtils;
-import com.rongyi.common.widget.recyclerview.layoutmanager.base.PositionScrollable;
-import com.rongyi.common.widget.recyclerview.layoutmanager.base.ScrollHelper;
-import com.rongyi.common.widget.viewpager2.adapter.FragmentStateAdapter;
-import com.rongyi.common.widget.viewpager2.adapter.StatefulAdapter;
+import com.sloth.functions.viewpager2.adapter.FragmentStateAdapter;
+import com.sloth.functions.viewpager2.adapter.StatefulAdapter;
+import com.sloth.functions.widget.ScrollHelper;
+import com.sloth.pinsplatform.R;
 
 import java.lang.annotation.Retention;
 

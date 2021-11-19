@@ -3,8 +3,7 @@ package com.sloth.functions.mvp;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-
-import com.rongyi.common.base.RYBaseFragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Author:    ZhuWenWu
@@ -17,7 +16,7 @@ import com.rongyi.common.base.RYBaseFragment;
  * 16/5/9      ZhuWenWu            1.0                    1.0
  * Why & What is modified:
  */
-public abstract class RYBaseMvpFragment<P extends RYBasePresenter> extends RYBaseFragment {
+public abstract class RYBaseMvpFragment<P extends RYBasePresenter> extends Fragment {
     protected P mPresenter;
 
     @Override

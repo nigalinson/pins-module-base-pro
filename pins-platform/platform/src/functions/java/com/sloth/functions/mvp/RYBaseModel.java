@@ -1,11 +1,8 @@
 package com.sloth.functions.mvp;
 
 import android.content.Context;
-
-import com.rongyi.common.base.RYApplication;
-import com.rongyi.common.functions.http.executor.RequestExecutor;
-import com.rongyi.common.utils.RYNetworkInfoHelper;
-import com.rongyi.common.utils.network.RyNetwork;
+import com.sloth.functions.http.executor.RequestExecutor;
+import com.sloth.tools.util.NetworkUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
@@ -71,7 +68,7 @@ public class RYBaseModel {
 
     //是否有网络
     protected boolean isOnline() {
-        return RyNetwork.isAvailable(RYApplication.getContext());
+        return NetworkUtils.isAvailable();
     }
 
     public void destroy(){

@@ -10,6 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Parcelable;
+import android.text.TextUtils;
+import android.view.View;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,11 +20,12 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 import androidx.annotation.StringRes;
 import androidx.core.app.NotificationCompat;
-import android.text.TextUtils;
-import android.view.View;
+
 import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
@@ -30,6 +34,7 @@ import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import static android.Manifest.permission.CALL_PHONE;
 
 /**
@@ -40,7 +45,7 @@ import static android.Manifest.permission.CALL_PHONE;
  *     desc  :
  * </pre>
  */
-class UtilsCenter {
+public class UtilsCenter {
 
     static void init(Application app) {
         UtilsActivityLifecycleImpl.INSTANCE.init(app);
@@ -163,15 +168,15 @@ class UtilsCenter {
         return ConvertUtils.bytes2HexString(bytes);
     }
 
-    static byte[] hexString2Bytes(String hexString) {
+    public static byte[] hexString2Bytes(String hexString) {
         return ConvertUtils.hexString2Bytes(hexString);
     }
 
-    static byte[] string2Bytes(final String string) {
+    public static byte[] string2Bytes(final String string) {
         return ConvertUtils.string2Bytes(string);
     }
 
-    static String bytes2String(final byte[] bytes) {
+    public static String bytes2String(final byte[] bytes) {
         return ConvertUtils.bytes2String(bytes);
     }
 
@@ -234,11 +239,11 @@ class UtilsCenter {
     ///////////////////////////////////////////////////////////////////////////
     // EncodeUtils
     ///////////////////////////////////////////////////////////////////////////
-    static byte[] base64Encode(final byte[] input) {
+    public static byte[] base64Encode(final byte[] input) {
         return EncodeUtils.base64Encode(input);
     }
 
-    static byte[] base64Decode(final byte[] input) {
+    public static byte[] base64Decode(final byte[] input) {
         return EncodeUtils.base64Decode(input);
     }
 

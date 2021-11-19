@@ -1,10 +1,8 @@
 package com.sloth.functions.mvp;
 
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
-
-import com.rongyi.common.base.RYBaseActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Author:    ZhuWenWu
@@ -17,7 +15,7 @@ import com.rongyi.common.base.RYBaseActivity;
  * 16/5/11      ZhuWenWu            1.0                    1.0
  * Why & What is modified:
  */
-public abstract class RYBaseMvpActivity<P extends RYBasePresenter> extends RYBaseActivity {
+public abstract class RYBaseMvpActivity<P extends RYBasePresenter> extends AppCompatActivity {
 
     protected P mPresenter;
 

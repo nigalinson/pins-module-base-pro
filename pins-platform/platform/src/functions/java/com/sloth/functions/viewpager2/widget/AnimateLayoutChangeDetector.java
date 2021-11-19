@@ -19,14 +19,11 @@ package com.sloth.functions.viewpager2.widget;
 import android.animation.LayoutTransition;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import java.util.Arrays;
-
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static com.rongyi.common.widget.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL;
+import static com.sloth.functions.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL;
 
 /**
  * Class used to detect if there are gaps between pages and if any of the pages contain a running

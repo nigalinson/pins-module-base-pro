@@ -21,24 +21,21 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.rongyi.common.widget.viewpager2.widget.ViewPager2.OnPageChangeCallback;
-import com.rongyi.common.widget.viewpager2.widget.ViewPager2.PageTransformer;
-
 import java.util.Locale;
 
 /**
- * Translates {@link OnPageChangeCallback} events to {@link PageTransformer} events.
+ * Translates {@link ViewPager2.OnPageChangeCallback} events to {@link ViewPager2.PageTransformer} events.
  */
-final class PageTransformerAdapter extends OnPageChangeCallback {
+final class PageTransformerAdapter extends ViewPager2.OnPageChangeCallback {
     private final LinearLayoutManager mLayoutManager;
 
-    private PageTransformer mPageTransformer;
+    private ViewPager2.PageTransformer mPageTransformer;
 
     PageTransformerAdapter(LinearLayoutManager layoutManager) {
         mLayoutManager = layoutManager;
     }
 
-    PageTransformer getPageTransformer() {
+    ViewPager2.PageTransformer getPageTransformer() {
         return mPageTransformer;
     }
 
@@ -48,7 +45,7 @@ final class PageTransformerAdapter extends OnPageChangeCallback {
      *
      * @param transformer The PageTransformer
      */
-    void setPageTransformer(@Nullable PageTransformer transformer) {
+    void setPageTransformer(@Nullable ViewPager2.PageTransformer transformer) {
         // TODO: add support for reverseDrawingOrder: b/112892792
         // TODO: add support for pageLayerType: b/112893074
         mPageTransformer = transformer;

@@ -1,12 +1,21 @@
 package com.sloth.tools.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.LayoutRes;
 
 import java.util.Locale;
 
@@ -19,6 +28,52 @@ import java.util.Locale;
  * </pre>
  */
 public class ViewUtils {
+
+    private ViewUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
+    public static <V extends View> V setGone(V view, boolean isGone) {
+        if (view != null) {
+            if (isGone) {
+                if (View.GONE != view.getVisibility()) {
+                    view.setVisibility(View.GONE);
+                }
+            } else {
+                if (View.VISIBLE != view.getVisibility()) {
+                    view.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+        return view;
+    }
+
+    public static <V extends View> V setInvisible(V view, boolean isGone) {
+        if (view != null) {
+            if (isGone) {
+                if (View.INVISIBLE != view.getVisibility()) {
+                    view.setVisibility(View.INVISIBLE);
+                }
+            } else {
+                if (View.VISIBLE != view.getVisibility()) {
+                    view.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+        return view;
+    }
+
+    public static void setViewsInvisible(boolean gone, View... views) {
+        for (View view : views) {
+            setInvisible(view, gone);
+        }
+    }
+
+    public static void setViewsGone(boolean gone, View... views) {
+        for (View view : views) {
+            setGone(view, gone);
+        }
+    }
 
     /**
      * Set the enabled state of this view.
@@ -115,4 +170,90 @@ public class ViewUtils {
                 (LayoutInflater) Utils.getApp().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return inflate.inflate(layoutId, null);
     }
+
+    /**
+     * 截图
+     * @param v
+     * @return
+     */
+    public static Bitmap snapshot(View v){
+        return snapshot(v, v.getWidth(), v.getHeight());
+    }
+
+    public static Bitmap snapshot(View v, int width, int height){
+        if(width <= 0 || height <= 0){ return null; }
+
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        if(b == null){ return null; }
+        Canvas c = new Canvas(b);
+        synchronized (c){
+            c.setBitmap(b);
+            v.draw(c);
+            c.setBitmap(null);
+        }
+        return b;
+    }
+
+
+    /**
+     * 调整侧边图标大小
+     * @param index
+     * @param tv
+     * @param size
+     */
+    public static void adjustDrawableSize(int index, TextView tv, int size){
+        Drawable drawable = tv.getCompoundDrawables()[index];
+        int dp = SizeUtils.dp2px(size);
+        drawable.setBounds(0, 0, dp, dp);//第一个 0 是距左边距离，第二个 0 是距上边距离，40 分别是长宽
+        tv.setCompoundDrawables(
+                index == 0 ? drawable : null,
+                index == 1 ? drawable : null,
+                index == 2 ? drawable : null,
+                index == 3 ? drawable : null
+        );
+    }
+
+    public static void expandViewTouchDelegate(final View view, final int top, final int bottom, final int left, final int right) {
+        ((View) view.getParent()).post(() -> {
+            Rect bounds = new Rect();
+            view.getHitRect(bounds);
+
+            bounds.top -= top;
+            bounds.bottom += bottom;
+            bounds.left -= left;
+            bounds.right += right;
+
+            TouchDelegate touchDelegate = new TouchDelegate(bounds, view);
+
+            if (view.getParent() instanceof View) {
+                ((View) view.getParent()).setTouchDelegate(touchDelegate);
+            }
+        });
+    }
+
+    public static void clearViewTouchDelegate(final View view) {
+        ((View) view.getParent()).post(() -> {
+            Rect bounds = new Rect();
+            view.getHitRect(bounds);
+            bounds.setEmpty();
+            TouchDelegate touchDelegate = new TouchDelegate(bounds, view);
+
+            if (view.getParent() instanceof View) {
+                ((View) view.getParent()).setTouchDelegate(touchDelegate);
+            }
+        });
+    }
+
+    public static void releaseImageViewResource(ImageView imageView) {
+        if (imageView == null) return;
+        Drawable drawable = imageView.getDrawable();
+        if (drawable != null && drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            if (bitmap != null && !bitmap.isRecycled()) {
+                bitmap.recycle();
+            }
+        }
+    }
+
 }

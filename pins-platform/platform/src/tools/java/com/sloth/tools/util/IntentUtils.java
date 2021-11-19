@@ -11,8 +11,7 @@ import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
-import android.support.v4.content.FileProvider;
-
+import androidx.core.content.FileProvider;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -42,6 +42,7 @@ dependencies {
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
+    testImplementation testDependencies.robolectric
     androidTestImplementation testDependencies.runner
     androidTestImplementation testDependencies.espresso
     androidTestImplementation testDependencies.mockitoCore
@@ -50,6 +51,7 @@ dependencies {
 
     api supportDependencies.appCompat
     api supportDependencies.design
+    api supportDependencies.constraintlayout
 
     api thirdDependencies.wmRouter
     api thirdDependencies.multidex
@@ -58,15 +60,11 @@ dependencies {
     api thirdDependencies.greendao
     api thirdDependencies.eventBus
     api thirdDependencies.butterKnife
-    api thirdDependencies.exoplayer
     api thirdDependencies.nineoldandroids
     implementation thirdDependencies.gson
     implementation thirdDependencies.logger
-    implementation thirdDependencies.xlog
     implementation thirdDependencies.glide
     implementation thirdDependencies.picasso
-    implementation thirdDependencies.zxing
-    implementation thirdDependencies.zxingCode
     implementation supportDependencies.lifecycle
     implementation thirdDependencies.retrofit
     implementation thirdDependencies.converterGson
@@ -78,10 +76,6 @@ dependencies {
     implementation thirdDependencies.protobufJava
     implementation thirdDependencies.converterProtobuf
     implementation thirdDependencies.protobufJsonFormat
-    implementation thirdDependencies.ijkplayerjava
-    implementation thirdDependencies.x5webview
-    implementation thirdDependencies.ffmpegRetriever
-    implementation thirdDependencies.ffmpegRtNative
     implementation thirdDependencies.stream
 }
 repositories {

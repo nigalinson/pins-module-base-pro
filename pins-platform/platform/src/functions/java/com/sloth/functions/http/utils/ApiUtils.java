@@ -1,12 +1,10 @@
 package com.sloth.functions.http.utils;
 
 import com.google.protobuf.ByteString;
-import com.rongyi.common.functions.http.options.APIInfos;
-import com.rongyi.common.functions.log.LogUtils;
-
+import com.sloth.functions.http.options.APIInfos;
+import com.sloth.tools.util.LogUtils;
 import java.io.File;
 import java.util.Random;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

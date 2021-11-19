@@ -3,9 +3,7 @@ package com.sloth.functions.image;
 import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
-
-import com.rongyi.common.functions.log.LogUtils;
-
+import com.sloth.tools.util.LogUtils;
 import java.lang.ref.WeakReference;
 
 /**

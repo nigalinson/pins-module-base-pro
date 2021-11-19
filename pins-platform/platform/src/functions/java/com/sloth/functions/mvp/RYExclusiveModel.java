@@ -3,10 +3,8 @@ package com.sloth.functions.mvp;
 import android.content.Context;
 
 import androidx.annotation.IntRange;
-
-import com.rongyi.common.functions.http.executor.RequestExecutor;
-import com.rongyi.common.functions.log.LogUtils;
-
+import com.sloth.functions.http.executor.RequestExecutor;
+import com.sloth.tools.util.LogUtils;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;

@@ -21,7 +21,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.rongyi.common.widget.viewpager2.widget.ViewPager2;
+import com.sloth.functions.viewpager2.widget.ViewPager2;
 
 /**
  * {@link ViewPager2} adapters should implement this interface to be called during

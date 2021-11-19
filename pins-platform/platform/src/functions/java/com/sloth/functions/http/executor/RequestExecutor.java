@@ -2,22 +2,21 @@ package com.sloth.functions.http.executor;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.rongyi.common.base.RYApplication;
-import com.rongyi.common.exception.RYApiException;
-import com.rongyi.common.functions.http.options.APIInfos;
-import com.rongyi.common.functions.log.LogUtils;
-import com.rongyi.common.functions.rx.Rx;
-import com.rongyi.common.utils.AutoDispose;
-import com.rongyi.common.utils.RYNetworkInfoHelper;
-import com.rongyi.common.utils.network.RyNetwork;
+import com.sloth.functions.AutoDispose;
+import com.sloth.functions.http.options.APIInfos;
+import com.sloth.functions.http.options.RetryWithDelay;
+import com.sloth.tools.util.LogUtils;
+import com.sloth.tools.util.NetworkUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author:    Carl
@@ -63,7 +62,8 @@ public class RequestExecutor {
         /**
          * 线程切换 设置
          */
-        private ObservableTransformer threadTransform = Rx.IO_TRANSFORM;
+        private ObservableTransformer threadTransform = upstream ->
+                upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         /**
          * 数据结构适配器 设置
          */
@@ -80,12 +80,16 @@ public class RequestExecutor {
         private boolean needOnline = false;
 
         public Builder io(){
-            this.threadTransform = Rx.IO_TRANSFORM;
+            this.threadTransform = upstream ->
+                    upstream.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread());
             return this;
         }
 
         public Builder main(){
-            this.threadTransform = Rx.MAIN_TRANSFORM;
+            this.threadTransform = upstream ->
+                    upstream.subscribeOn(AndroidSchedulers.mainThread())
+                            .observeOn(AndroidSchedulers.mainThread());
             return this;
         }
 
@@ -95,12 +99,12 @@ public class RequestExecutor {
         }
 
         public Builder retry(int times, int interval){
-            this.retryFunction = Rx.retry(times, interval);
+            this.retryFunction = rxRetry(times, interval);
             return this;
         }
 
         public Builder retry3Time(){
-            this.retryFunction = Rx.RETRY_THREE_TIMES;
+            this.retryFunction = new RetryWithDelay(3/*重试3次*/, 3000/*重试间隔*/);
             return this;
         }
 
@@ -151,7 +155,7 @@ public class RequestExecutor {
             buildRequest();
 
             if(onNext == null && onError == null && onComplete == null){
-                return Rx.NOTHING();
+                return disposeShit();
             }
 
             Disposable disposable = null;
@@ -178,7 +182,7 @@ public class RequestExecutor {
             this.observer = observer;
 
             if(needOnline && !checkNetwork(observer)){
-                return Rx.NOTHING();
+                return disposeShit();
             }
 
             return realExecute();
@@ -188,7 +192,7 @@ public class RequestExecutor {
             this.onNext = consumer;
 
             if(needOnline && !checkNetwork(null, null)){
-                return Rx.NOTHING();
+                return disposeShit();
             }
 
             return realExecute();
@@ -199,7 +203,7 @@ public class RequestExecutor {
             this.onError = error;
 
             if(needOnline && !checkNetwork(error, null)){
-                return Rx.NOTHING();
+                return disposeShit();
             }
 
             return realExecute();
@@ -211,7 +215,7 @@ public class RequestExecutor {
             this.onComplete = complete;
 
             if(needOnline && !checkNetwork(error, complete)){
-                return Rx.NOTHING();
+                return disposeShit();
             }
 
             return realExecute();
@@ -219,9 +223,9 @@ public class RequestExecutor {
     }
 
     private static boolean checkNetwork(Observer subscriber) {
-        if (!RyNetwork.isAvailable(RYApplication.getContext())) {
+        if (!NetworkUtils.isAvailable()) {
             if(subscriber != null){
-                subscriber.onError(new RYApiException(APIInfos.NETWORK_ERROR_MSG));
+                subscriber.onError(new RuntimeException(APIInfos.NETWORK_ERROR_MSG));
                 subscriber.onComplete();
             }
             return false;
@@ -230,10 +234,10 @@ public class RequestExecutor {
     }
 
     private static boolean checkNetwork(Consumer consumer, Action action) {
-        if (!RyNetwork.isAvailable(RYApplication.getContext())) {
+        if (!NetworkUtils.isAvailable()) {
             if(consumer != null){
                 try {
-                    consumer.accept(new RYApiException(APIInfos.NETWORK_ERROR_MSG));
+                    consumer.accept(new RuntimeException(APIInfos.NETWORK_ERROR_MSG));
                 } catch (Exception e) {
                     LogUtils.e(TAG, e.getMessage());
                     e.printStackTrace();
@@ -253,5 +257,23 @@ public class RequestExecutor {
         return true;
     }
 
+    /**
+     * 生成retry
+     * @param times
+     * @param interval
+     * @return
+     */
+    private static Function rxRetry(int times, int interval) {
+        return new RetryWithDelay(times, interval);
+    }
 
+    public static Disposable disposeShit(){
+        return new Disposable() {
+            @Override
+            public void dispose() { }
+
+            @Override
+            public boolean isDisposed() { return true; }
+        };
+    }
 }

@@ -3,9 +3,7 @@ package com.sloth.functions.adapter;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.rongyi.common.utils.AutoDispose;
-
+import com.sloth.functions.AutoDispose;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

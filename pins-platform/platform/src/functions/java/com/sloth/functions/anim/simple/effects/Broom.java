@@ -5,7 +5,7 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-import com.rongyi.common.animator.remind.Effect;
+import com.sloth.functions.anim.simple.Effect;
 
 /**
  * Author:    Carl

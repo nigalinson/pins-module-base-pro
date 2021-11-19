@@ -1,5 +1,7 @@
 package com.sloth.functions.dynamicbean;
 
+import com.sloth.tools.util.ReflectUtils;
+
 /**
  * Author:    Carl
  * Version    V1.0
@@ -19,7 +21,7 @@ public abstract class OptCombine implements Opt<Object[]> {
     }
 
     public Opt<?> newOptAt(int index){
-        return (Opt<?>) ReflectUtils.getIns(opts[index]);
+        return (Opt<?>) ReflectUtils.reflect(opts[index]).get();
     }
 
 }

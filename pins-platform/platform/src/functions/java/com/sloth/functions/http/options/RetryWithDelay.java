@@ -1,10 +1,7 @@
 package com.sloth.functions.http.options;
 
-import com.rongyi.common.exception.RYApiException;
-import com.rongyi.common.functions.log.LogUtils;
-
+import com.sloth.tools.util.LogUtils;
 import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
@@ -39,14 +36,9 @@ public class RetryWithDelay implements Function<Observable<? extends Throwable>,
                 throwable = e;
                 e = e.getCause();
             }
-            if (e instanceof RYApiException) {
-                RYApiException RYApiException = (RYApiException) e;
-                if (RYApiException.isTimeOutError()) {
-                    if (++mRetryCount <= mMaxRetries) {
-                        LogUtils.d("RetryWithDelay", "服务器超时错误,将在 " + mRetryDelayMillis + " 秒之后重试, 当前重试次数: " + mRetryCount);
-                        return Observable.timer(mRetryDelayMillis, TimeUnit.MILLISECONDS);
-                    }
-                }
+            if (++mRetryCount <= mMaxRetries) {
+                LogUtils.d("RetryWithDelay", "服务器超时错误,将在 " + mRetryDelayMillis + " 秒之后重试, 当前重试次数: " + mRetryCount);
+                return Observable.timer(mRetryDelayMillis, TimeUnit.MILLISECONDS);
             }
             return Observable.error(throwable);
         });

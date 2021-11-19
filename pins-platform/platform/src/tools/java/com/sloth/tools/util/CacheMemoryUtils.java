@@ -1,8 +1,8 @@
 package com.sloth.tools.util;
 
 import android.util.LruCache;
-
 import androidx.annotation.NonNull;
+import com.sloth.tools.constant.CacheConstants;
 import java.util.HashMap;
 import java.util.Map;
 
