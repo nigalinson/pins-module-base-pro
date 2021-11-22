@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String[] menus = new String[]{"banner"};
+    private final String[] menus = new String[]{"banner", "barcode"};
 
     private RecyclerView rvList;
 
