@@ -2,7 +2,7 @@ package com.sloth.banner.vh;
 
 import android.view.View;
 
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseViewHolder;
 
 /**
  * Author:    Carl
@@ -15,7 +15,7 @@ import com.sloth.functions.adapter.RYBaseViewHolder;
  * 2020/12/9         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public abstract class PagerViewHolder<T> extends RYBaseViewHolder<T> {
+public abstract class PagerViewHolder<T> extends BaseViewHolder<T> {
 
     /**
      * 未加载状态

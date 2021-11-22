@@ -15,7 +15,7 @@ import com.sloth.banner.data.Playable;
 import com.sloth.banner.transform.Orientable;
 import com.sloth.banner.vh.VideoStatusListener;
 import com.sloth.functions.AutoDispose;
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseViewHolder;
 import com.sloth.functions.viewpager2.widget.ViewPager2;
 import com.sloth.player.PlayerConst;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class XBanner<T extends Playable> extends FrameLayout {
 
     private ViewPager2.PageTransformer pageTransformer;
 
-    private ProxyAdapter<RYBaseViewHolder<T>, T> proxyAdapter;
+    private ProxyAdapter<BaseViewHolder<T>, T> proxyAdapter;
 
     private PagerAdapter.PagerChangedListener proxyPagerChangedListener;
 
@@ -123,9 +123,9 @@ public class XBanner<T extends Playable> extends FrameLayout {
         viewPager2.setOffscreenPageLimit(limit);
     }
 
-    public void setAdapter(BannerAdapter<RYBaseViewHolder<T>, T> adapter){
+    public void setAdapter(BannerAdapter<BaseViewHolder<T>, T> adapter){
         if(proxyAdapter == null){
-            proxyAdapter = new ProxyAdapter<RYBaseViewHolder<T>, T>(adapter);
+            proxyAdapter = new ProxyAdapter<BaseViewHolder<T>, T>(adapter);
             proxyAdapter.setVideoPlayerType(playerType);
             proxyAdapter.setVideoLoop(videoLoop);
             proxyAdapter.setVideoScaleType(scaleType);
@@ -176,7 +176,7 @@ public class XBanner<T extends Playable> extends FrameLayout {
     }
 
     @Nullable
-    public BannerAdapter<RYBaseViewHolder<T>, T> getInnerAdapter() {
+    public BannerAdapter<BaseViewHolder<T>, T> getInnerAdapter() {
         return proxyAdapter != null ? proxyAdapter.getUserAdapter() : null;
     }
 

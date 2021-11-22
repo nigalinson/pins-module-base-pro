@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseViewHolder;
 import com.sloth.banner.data.Playable;
 import com.sloth.banner.player.PlayerConfig;
 import com.sloth.banner.player.VideoPlayerProxyPools;
@@ -23,7 +23,7 @@ import com.sloth.banner.vh.VideoStatusListener;
  * 2021/5/19         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public abstract class VideoAdapter<VH extends RYBaseViewHolder<T>, T extends Playable> extends InfiniteAdapter<VH,T> {
+public abstract class VideoAdapter<VH extends BaseViewHolder<T>, T extends Playable> extends InfiniteAdapter<VH,T> {
 
     private final PlayerConfig playerConfig = new PlayerConfig();
     private final VideoPlayerProxyPools videoViewPools = VideoPlayerProxyPools.newInstance();

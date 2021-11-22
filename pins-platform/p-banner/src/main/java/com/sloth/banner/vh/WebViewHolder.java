@@ -10,7 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.sloth.functions.AutoDispose;
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseViewHolder;
 import com.sloth.banner.data.Playable;
 import com.sloth.tools.util.LogUtils;
 import com.sloth.tools.util.StringUtils;
@@ -26,7 +26,7 @@ import com.sloth.tools.util.StringUtils;
  * 2020/12/9         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public class WebViewHolder<T extends Playable> extends RYBaseViewHolder<T> implements AutoDispose.AutoDisposable {
+public class WebViewHolder<T extends Playable> extends BaseViewHolder<T> implements AutoDispose.AutoDisposable {
 
     private static final String TAG = WebViewHolder.class.getSimpleName();
 

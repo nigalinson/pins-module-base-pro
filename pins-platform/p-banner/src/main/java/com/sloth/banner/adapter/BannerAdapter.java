@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import com.sloth.functions.adapter.RYBaseAdapter;
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseAdapter;
+import com.sloth.functions.adapter.BaseViewHolder;
 
 /**
  * Author:    Carl
@@ -18,7 +18,7 @@ import com.sloth.functions.adapter.RYBaseViewHolder;
  * 2021/5/19         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public abstract class BannerAdapter<VH extends RYBaseViewHolder<T>, T> extends RYBaseAdapter<VH, T> {
+public abstract class BannerAdapter<VH extends BaseViewHolder<T>, T> extends BaseAdapter<VH, T> {
 
     public BannerAdapter(Context context) {
         super(context);

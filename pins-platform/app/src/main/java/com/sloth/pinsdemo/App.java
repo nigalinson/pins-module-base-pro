@@ -14,6 +14,7 @@ import com.sankuai.waimai.router.components.DefaultOnCompleteListener;
 import com.sankuai.waimai.router.core.Debugger;
 import com.sloth.pinsplatform.log.Log;
 import com.sloth.tools.util.LogUtils;
+import com.sloth.tools.util.Utils;
 
 /**
  * Author:    Carl
@@ -44,6 +45,7 @@ public class App extends MultiDexApplication {
         super.onCreate();
         initRouter(this);
 
+        Utils.init(this);
         LogUtils.init(Router.getService(Log.class, Configs.LOG_ENGINE));
     }
 

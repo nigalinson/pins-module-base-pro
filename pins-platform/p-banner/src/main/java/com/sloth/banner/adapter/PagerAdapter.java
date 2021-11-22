@@ -6,7 +6,7 @@ import android.util.SparseArray;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseViewHolder;
 import com.sloth.banner.data.Playable;
 import com.sloth.banner.vh.PagerViewHolder;
 import com.sloth.banner.vh.PlayerViewHolder;
@@ -32,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
  * 2020/12/4         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public abstract class PagerAdapter<VH extends RYBaseViewHolder<T>, T extends Playable> extends VideoAdapter<VH,T> {
+public abstract class PagerAdapter<VH extends BaseViewHolder<T>, T extends Playable> extends VideoAdapter<VH,T> {
 
     private static final String TAG = PagerAdapter.class.getSimpleName();
 
@@ -198,7 +198,7 @@ public abstract class PagerAdapter<VH extends RYBaseViewHolder<T>, T extends Pla
         usingViewHolderQueue.clear();
     }
 
-    private static class UsingViewHolderQueue<VH extends RYBaseViewHolder<T>, T extends Playable> {
+    private static class UsingViewHolderQueue<VH extends BaseViewHolder<T>, T extends Playable> {
         private final SparseArray<VH> queue = new SparseArray<>();
         private final SparseArray<T> data = new SparseArray<>();
 

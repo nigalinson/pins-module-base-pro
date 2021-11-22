@@ -2,8 +2,8 @@ package com.sloth.banner.adapter;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-import com.sloth.functions.adapter.RYBaseAdapter;
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseAdapter;
+import com.sloth.functions.adapter.BaseViewHolder;
 import com.sloth.tools.util.LogUtils;
 
 /**
@@ -17,7 +17,7 @@ import com.sloth.tools.util.LogUtils;
  * 2021/5/18         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public abstract class InfiniteAdapter<VH extends RYBaseViewHolder<T>, T> extends RYBaseAdapter<VH,T> {
+public abstract class InfiniteAdapter<VH extends BaseViewHolder<T>, T> extends BaseAdapter<VH,T> {
 
     private static final String TAG = InfiniteAdapter.class.getSimpleName();
 

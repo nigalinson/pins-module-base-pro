@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseViewHolder;
 import com.sloth.banner.data.Playable;
 import com.sloth.banner.transform.DecorTransform;
 import com.sloth.functions.viewpager2.widget.ViewPager2;
@@ -25,7 +25,7 @@ import java.util.List;
  * 2021/5/19         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public class ProxyAdapter<VH extends RYBaseViewHolder<T>, T extends Playable> extends PagerAdapter<VH,T> {
+public class ProxyAdapter<VH extends BaseViewHolder<T>, T extends Playable> extends PagerAdapter<VH,T> {
 
     /**
      * 用户传入的子adp，实际由代理adp来完成无限轮播、翻页等特性

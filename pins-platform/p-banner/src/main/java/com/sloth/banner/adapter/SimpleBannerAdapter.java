@@ -18,7 +18,7 @@ import com.sloth.banner.data.Playable;
 import com.sloth.banner.vh.PagerViewHolder;
 import com.sloth.banner.vh.PlayerViewHolder;
 import com.sloth.functions.AutoDispose;
-import com.sloth.functions.adapter.RYBaseViewHolder;
+import com.sloth.functions.adapter.BaseViewHolder;
 import com.sloth.functions.image.RYImageLoader;
 import com.sloth.tools.util.LogUtils;
 import com.sloth.tools.util.StringUtils;
@@ -34,7 +34,7 @@ import com.sloth.tools.util.StringUtils;
  * 2021/5/20         Carl            1.0                    1.0
  * Why & What is modified:
  */
-public class SimpleBannerAdapter<T extends Playable> extends BannerAdapter<RYBaseViewHolder<T>, T> {
+public class SimpleBannerAdapter<T extends Playable> extends BannerAdapter<BaseViewHolder<T>, T> {
 
     public SimpleBannerAdapter(Context context) {
         super(context);
@@ -65,8 +65,8 @@ public class SimpleBannerAdapter<T extends Playable> extends BannerAdapter<RYBas
     }
 
     @Override
-    public RYBaseViewHolder<T> onCreateViewHolder(int viewType, @NonNull View itemView) {
-        RYBaseViewHolder<T> vh = null;
+    public BaseViewHolder<T> onCreateViewHolder(int viewType, @NonNull View itemView) {
+        BaseViewHolder<T> vh = null;
         if(viewType == Playable.MediaType.Video.type){
             vh = new SimpleVideoHolder<T>(itemView);
         }else if(viewType == Playable.MediaType.Image.type){
@@ -83,16 +83,16 @@ public class SimpleBannerAdapter<T extends Playable> extends BannerAdapter<RYBas
     }
 
     @Override
-    public void onViewRecycled(@NonNull RYBaseViewHolder<T> holder) {
+    public void onViewRecycled(@NonNull BaseViewHolder<T> holder) {
         System.out.println("onViewRecycled:" + holder.getClass().getSimpleName() + "," + holder.hashCode());
         super.onViewRecycled(holder);
     }
 
-    protected RYBaseViewHolder<T> createOtherViewHolder(int viewType, View itemView) {
+    protected BaseViewHolder<T> createOtherViewHolder(int viewType, View itemView) {
         return new SimpleGlideVH<T>(itemView);
     }
 
-    protected void onViewHolderCreated(RYBaseViewHolder<T> vh) { }
+    protected void onViewHolderCreated(BaseViewHolder<T> vh) { }
 
     public static class SimpleGlideVH<T extends Playable> extends PagerViewHolder<T> {
 
