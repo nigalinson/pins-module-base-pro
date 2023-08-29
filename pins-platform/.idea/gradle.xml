@@ -4,7 +4,7 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="PLATFORM" />
+        <option name="testRunner" value="GRADLE" />
         <option name="disableWrapperSourceDistributionNotification" value="true" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -13,17 +13,20 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/p-banner" />
+            <option value="$PROJECT_DIR$/p-animator" />
+            <option value="$PROJECT_DIR$/p-architecture" />
             <option value="$PROJECT_DIR$/p-barcode" />
-            <option value="$PROJECT_DIR$/p-ffmpeg-mediainfo-retriever" />
-            <option value="$PROJECT_DIR$/p-liulisho-download" />
+            <option value="$PROJECT_DIR$/p-fetch-download" />
+            <option value="$PROJECT_DIR$/p-glide" />
+            <option value="$PROJECT_DIR$/p-liulisho" />
             <option value="$PROJECT_DIR$/p-player" />
+            <option value="$PROJECT_DIR$/p-rx" />
+            <option value="$PROJECT_DIR$/p-widget" />
             <option value="$PROJECT_DIR$/p-xlog" />
             <option value="$PROJECT_DIR$/platform" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

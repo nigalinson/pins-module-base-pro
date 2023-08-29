@@ -24,10 +24,10 @@ uploadArchives {
             }
 
             pom.project {
-                name 'pins-platform'//项目名称
-                version PLATFORM_VERSION_SNAPSHOT + "-SNAPSHOT"//版本号
-                artifactId 'pinsplatform'//最后下载的aar包名称就是这个
-                groupId 'com.sloth.pinsplatform'// 建议使用包命
+                name 'p-platform'//项目名称
+                version PLATFORM_VERSION + "-SNAPSHOT"//版本号
+                artifactId 'platform'//最后下载的aar包名称就是这个
+                groupId 'com.sloth.platform'// 建议使用包命
                 packaging 'aar'//打包类型
                 description '平台库'// 描述信息
             }
@@ -45,10 +45,10 @@ task uploadRelease(type: Upload, group: 'upload'){
             }
 
             pom.project {
-                name 'pins-platform'//项目名称
+                name 'p-platform'//项目名称
                 version PLATFORM_VERSION//版本号
-                artifactId 'pinsplatform'//最后下载的aar包名称就是这个
-                groupId 'com.sloth.pinsplatform'// 建议使用包命
+                artifactId 'platform'//最后下载的aar包名称就是这个
+                groupId 'com.sloth.platform'// 建议使用包命
                 packaging 'aar'//打包类型
                 description '容易网项目公共实体类库'// 描述信息
             }

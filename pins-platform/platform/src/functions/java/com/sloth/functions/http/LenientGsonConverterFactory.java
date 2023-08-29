@@ -5,14 +5,12 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
-
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -20,17 +18,6 @@ import okio.Buffer;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-/**
- * Author:    Oscar
- * Version    V1.0
- * Date:      2021/9/22
- * Description: Fixed Use JsonReader.setLenient(true) to accept malformed JSON at line 1 column 1 path $
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2021/9/22      Oscar            1.0                    1.0
- * Why & What is modified:
- */
 public class LenientGsonConverterFactory extends Converter.Factory {
 
     /**

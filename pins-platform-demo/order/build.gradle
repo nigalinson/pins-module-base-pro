@@ -27,14 +27,41 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    productFlavors {
+
+        apple {
+            flavorDimensions "mode"
+        }
+
+        pear {
+            flavorDimensions "mode"
+        }
+    }
+
     sourceSets {
+        def dirs = ['order','address']
         main {
-            def dirs = ['main']
+            manifest.srcFile 'src/order/main/AndroidManifest.xml'
             dirs.each { dir ->
-                java.srcDir("src/$dir/java")
-                res.srcDir("src/$dir/res")
+                java.srcDir("src/${dir}/main/java")
+                res.srcDir("src/${dir}/main/res")
             }
         }
+
+        apple {
+            dirs.each { dir ->
+                java.srcDir("src/${dir}/apple/java")
+                res.srcDir("src/${dir}/apple/res")
+            }
+        }
+
+        pear {
+            dirs.each { dir ->
+                java.srcDir("src/${dir}/pear/java")
+                res.srcDir("src/${dir}/pear/res")
+            }
+        }
+
     }
 
 }

@@ -2,22 +2,12 @@ package com.sloth.functions.http;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 
-/**
- * Author:    Carl
- * Version    V1.0
- * Date:      2020/9/28 19:22
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2020/9/28         Carl            1.0                    1.0
- * Why & What is modified:
- */
 public abstract class BaseApiModule {
+
+    private final String apiHost;
 
     //默认超时时间
     private static final long DEFAULT_TIMEOUT = 61;
@@ -35,16 +25,19 @@ public abstract class BaseApiModule {
      */
     private final Cache cacheConfig;
 
-    protected BaseApiModule() {
+    public BaseApiModule(String apiHost) {
+        this.apiHost = apiHost;
         initInterceptors(interceptors);
         cacheConfig = initCacheConfig(cacheSize());
+    }
+
+    public String getApiHost() {
+        return apiHost;
     }
 
     protected abstract void initInterceptors(List<Interceptor> interceptors);
 
     protected abstract Cache initCacheConfig(long cacheSize);
-
-    public abstract String apiHost();
 
     public List<Interceptor> getInterceptors(){
         return interceptors;
@@ -55,10 +48,6 @@ public abstract class BaseApiModule {
     }
 
     public long connectTimeout(){
-        return DEFAULT_TIMEOUT;
-    }
-
-    public long readTimeout(){
         return DEFAULT_TIMEOUT;
     }
 

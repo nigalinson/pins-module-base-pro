@@ -9,14 +9,18 @@ android {
     defaultConfig {
         minSdkVersion Integer.parseInt(MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(TARGET_SDK_VERSION)
-        versionCode Integer.parseInt(PLATFORM_VERSION.replace('.',''))
-        versionName PLATFORM_VERSION
+        versionCode Integer.parseInt(P_XLOG_VERSION.replace('.',''))
+        versionName P_XLOG_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -39,18 +43,12 @@ android {
 }
 
 dependencies {
-
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.mockito
-    testImplementation testDependencies.robolectric
-    androidTestImplementation testDependencies.runner
-    androidTestImplementation testDependencies.espresso
-    androidTestImplementation testDependencies.mockitoCore
-
-    api project(':platform')
-
     annotationProcessor thirdDependencies.wmRouterAnno
-    api thirdDependencies.xlog
+    implementation thirdDependencies.wmRouter
+    implementation project(':platform')
+
+    implementation thirdDependencies.xlog
+
 }
 
 apply from: 'push_maven.gradle'

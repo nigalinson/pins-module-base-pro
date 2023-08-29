@@ -5,22 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-/**
- * Author:    Carl
- * Version    V1.0
- * Date:      2020/9/28 19:21
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2020/9/28         Carl            1.0                    1.0
- * Why & What is modified:
- * 接口提供器, 生成器
- */
 public class API {
     private static final API INSTANCE = new API();
 
@@ -36,13 +23,6 @@ public class API {
 
     private API(){}
 
-    /**
-     * 调用
-     * {@link this#create(BaseApiModule, Class)} 后，再次调用可以不传 module
-     * @param clz
-     * @param <ApiStore>
-     * @return
-     */
     public <ApiStore> ApiStore create(Class<ApiStore> clz){
         return create(null, clz);
     }
@@ -73,23 +53,25 @@ public class API {
             builder.addInterceptor(interceptor);
         }
 
-        //通用log拦截器
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //xlog拦截器
+        PlatformLogInterceptor loggingInterceptor = new PlatformLogInterceptor();
+        loggingInterceptor.setLevel(PlatformLogInterceptor.Level.BODY);
         builder.addInterceptor(loggingInterceptor);
 
         //设置超时时间等
         OkHttpClient okHttpClient = builder
                 .connectTimeout(module.connectTimeout(), TimeUnit.SECONDS)
-                .readTimeout(module.readTimeout(), TimeUnit.SECONDS)
+                .readTimeout(module.connectTimeout(), TimeUnit.SECONDS)
+                .writeTimeout(module.connectTimeout(), TimeUnit.SECONDS)
                 .cache(module.getCacheConfig())
+                .retryOnConnectionFailure(false)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(LenientGsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(module.apiHost())
+                .baseUrl(module.getApiHost())
                 .build();
 
         return retrofit.create(clz);

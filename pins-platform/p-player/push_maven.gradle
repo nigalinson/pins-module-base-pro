@@ -25,7 +25,7 @@ uploadArchives {
 
             pom.project {
                 name 'p-player'//项目名称
-                version P_PLAYER_VERSION_SNAPSHOT + "-SNAPSHOT"//版本号
+                version P_PLAYER_VERSION + "-SNAPSHOT"//版本号
                 artifactId 'player'//最后下载的aar包名称就是这个
                 groupId 'com.sloth.player'// 建议使用包命
                 packaging 'aar'//打包类型

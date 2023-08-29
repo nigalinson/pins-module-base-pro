@@ -3,7 +3,6 @@ package com.sloth.barcode;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -11,8 +10,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.sloth.tools.util.Utils;
-
+import com.sloth.utils.Utils;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.EnumMap;

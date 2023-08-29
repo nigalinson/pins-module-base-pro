@@ -25,9 +25,9 @@ uploadArchives {
 
             pom.project {
                 name 'p-xlog'//项目名称
-                version P_XLOG_VERSION_SNAPSHOT + "-SNAPSHOT"//版本号
+                version P_XLOG_VERSION + "-SNAPSHOT"//版本号
                 artifactId 'xlog'//最后下载的aar包名称就是这个
-                groupId 'com.sloth.xlog'// 建议使用包命
+                groupId 'com.sloth.functions.log.xlog'// 建议使用包命
                 packaging 'aar'//打包类型
                 description 'xlog日志库'// 描述信息
             }
@@ -48,7 +48,7 @@ task uploadRelease(type: Upload, group: 'upload'){
                 name 'p-xlog'//项目名称
                 version P_XLOG_VERSION//版本号
                 artifactId 'xlog'//最后下载的aar包名称就是这个
-                groupId 'com.sloth.xlog'// 建议使用包命
+                groupId 'com.sloth.functions.log.xlog'// 建议使用包命
                 packaging 'aar'//打包类型
                 description 'xlog日志库'// 描述信息
             }

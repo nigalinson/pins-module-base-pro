@@ -27,6 +27,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    productFlavors {
+
+        apple {
+            flavorDimensions "mode"
+        }
+
+        pear {
+            flavorDimensions "mode"
+        }
+    }
+
     sourceSets {
         main {
             def dirs = ['main']

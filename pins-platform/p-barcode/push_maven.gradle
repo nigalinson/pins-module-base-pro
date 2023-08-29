@@ -24,12 +24,12 @@ uploadArchives {
             }
 
             pom.project {
-                name 'p-banner'//项目名称
-                version P_BANNER_VERSION_SNAPSHOT + "-SNAPSHOT"//版本号
-                artifactId 'banner'//最后下载的aar包名称就是这个
-                groupId 'com.sloth.banner'// 建议使用包命
+                name 'p-barcode'//项目名称
+                version P_BAR_CODE_VERSION + "-SNAPSHOT"//版本号
+                artifactId 'barcode'//最后下载的aar包名称就是这个
+                groupId 'com.sloth.barcode'// 建议使用包命
                 packaging 'aar'//打包类型
-                description '轮播组件'// 描述信息
+                description '扫码组件'// 描述信息
             }
         }
     }
@@ -45,12 +45,12 @@ task uploadRelease(type: Upload, group: 'upload'){
             }
 
             pom.project {
-                name 'p-banner'//项目名称
-                version P_BANNER_VERSION//版本号
-                artifactId 'banner'//最后下载的aar包名称就是这个
-                groupId 'com.sloth.banner'// 建议使用包命
+                name 'p-barcode'//项目名称
+                version P_BAR_CODE_VERSION//版本号
+                artifactId 'barcode'//最后下载的aar包名称就是这个
+                groupId 'com.sloth.barcode'// 建议使用包命
                 packaging 'aar'//打包类型
-                description '轮播组件'// 描述信息
+                description '扫码组件'// 描述信息
             }
         }
     }

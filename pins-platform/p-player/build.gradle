@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion Integer.parseInt(MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(TARGET_SDK_VERSION)
-        versionCode Integer.parseInt(PLATFORM_VERSION.replace('.',''))
-        versionName PLATFORM_VERSION
+        versionCode Integer.parseInt(P_PLAYER_VERSION.replace('.',''))
+        versionName P_PLAYER_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -39,17 +39,10 @@ android {
 }
 
 dependencies {
-
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.mockito
-    testImplementation testDependencies.robolectric
-    androidTestImplementation testDependencies.runner
-    androidTestImplementation testDependencies.espresso
-    androidTestImplementation testDependencies.mockitoCore
-
-    api project(':platform')
-
     annotationProcessor thirdDependencies.wmRouterAnno
+    implementation thirdDependencies.wmRouter
+    implementation project(':platform')
+    implementation project(':p-rx')
 
     api thirdDependencies.exoplayer
 }

@@ -1,65 +1,70 @@
 package com.sloth.pinsdemo;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.sankuai.waimai.router.Router;
-import com.sloth.functions.adapter.BaseAdapter;
-import com.sloth.functions.adapter.BaseViewHolder;
-
-import java.util.Arrays;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+import com.sloth.functions.http.API;
+import com.sloth.functions.http.DefaultApiModule;
+import com.sloth.platform.ComponentTypes;
+import com.sloth.platform.Platform;
+import com.sloth.rx.Obx;
+import com.sloth.rx.Rx;
 
 public class MainActivity extends AppCompatActivity {
-
-    private final String[] menus = new String[]{"banner", "barcode"};
-
-    private RecyclerView rvList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rvList = findViewById(R.id.rv_list);
 
-        rvList.setLayoutManager(new LinearLayoutManager(this));
-        BaseAdapter<VH, String> adp = new BaseAdapter<VH, String>(this) {
-            @NonNull
+        Apple apple = new Apple();
+        apple.setName("red fuji");
+        apple.setWeight(1);
+
+        String json1 = Platform.json().toJson(apple);
+        System.out.println("json1:" + json1);
+
+        String json2 = Platform.json(ComponentTypes.JSON_SERIALIZE.GSON,
+                GsonBuilder.class,
+                new GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+        ).toJson(apple);
+        System.out.println("json2:" + json2);
+
+        ApiStore apiStore = API.getInstance().create(new DefaultApiModule("http://api.rongyiguang.com/"), ApiStore.class);
+
+        Rx.delegate(apiStore.getServerTime(String.valueOf(System.currentTimeMillis()))).ui().execute(new Obx<Object>() {
             @Override
-            public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new VH(new AppCompatButton(parent.getContext()));
+            protected void onExe(Object o) {
+                super.onExe(o);
+                Platform.log().d("result", Platform.json().toJson(o));
             }
-
-            @Override
-            public void onBindViewHolder(@NonNull VH holder, int position) {
-                holder.bindViewData(menus[position]);
-                holder.itemView.setOnClickListener(v -> Router.startUri(MainActivity.this, "/" + menus[position]));
-            }
-        };
-        rvList.setAdapter(adp);
-
-        adp.resetItems(Arrays.asList(menus));
+        });
 
     }
 
-    private static class VH extends BaseViewHolder<String> {
+    public static final class Apple {
 
-        AppCompatButton tv;
+        @Expose
+        public String name;
+        @Expose(serialize = false)
+        public int weight;
 
-        public VH(View itemView) {
-            super(itemView);
-            tv = (AppCompatButton) itemView;
+        public String getName() {
+            return name;
         }
 
-        @Override
-        public void bindViewData(String data) {
-            tv.setText(data);
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        public void setWeight(int weight) {
+            this.weight = weight;
         }
     }
+
 }

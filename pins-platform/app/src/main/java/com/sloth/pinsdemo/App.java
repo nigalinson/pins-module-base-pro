@@ -2,38 +2,15 @@ package com.sloth.pinsdemo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import androidx.multidex.MultiDexApplication;
-
 import com.sankuai.waimai.router.Router;
-import com.sankuai.waimai.router.annotation.RouterProvider;
-import com.sankuai.waimai.router.annotation.RouterService;
 import com.sankuai.waimai.router.common.DefaultRootUriHandler;
 import com.sankuai.waimai.router.components.DefaultLogger;
 import com.sankuai.waimai.router.components.DefaultOnCompleteListener;
 import com.sankuai.waimai.router.core.Debugger;
-import com.sloth.pinsplatform.log.Log;
-import com.sloth.tools.util.LogUtils;
-import com.sloth.tools.util.Utils;
+import com.sloth.utils.Utils;
 
-/**
- * Author:    Carl
- * Version    V1.0
- * Date:      2021/11/11 14:20
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2021/11/11         Carl            1.0                    1.0
- * Why & What is modified:
- */
-@RouterService(interfaces = Context.class, key = "/application", singleton = true)
 public class App extends MultiDexApplication {
-
-    @RouterProvider
-    public static App provideApplication() {
-        return sApplication;
-    }
 
     @SuppressLint("StaticFieldLeak")
     private static App sApplication;
@@ -46,7 +23,6 @@ public class App extends MultiDexApplication {
         initRouter(this);
 
         Utils.init(this);
-        LogUtils.init(Router.getService(Log.class, Configs.LOG_ENGINE));
     }
 
     private void initRouter(Context context) {

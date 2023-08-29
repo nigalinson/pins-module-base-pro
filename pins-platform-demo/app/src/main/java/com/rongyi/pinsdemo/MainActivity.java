@@ -5,18 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.rongyi.address.AddressRpc;
 import com.rongyi.base.Iprinter;
-import com.rongyi.info_api.InfoConstant;
 import com.rongyi.info_api.LoginRpc;
-import com.rongyi.order.OrderActivity;
 import com.rongyi.order.OrderConst;
 import com.rongyi.order.OrderRpc;
 import com.sankuai.waimai.router.Router;
-import com.sankuai.waimai.router.common.DefaultPageUriRequest;
-import com.sankuai.waimai.router.common.DefaultUriRequest;
-
 import java.util.Optional;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
             Router.startUri(MainActivity.this, OrderConst.ORDER_SCHEME);
         });
 
+        Router.getService(AddressRpc.class).getAddress("123456");
         Router.getService(OrderRpc.class).makeOrder("9998877");
+        Optional.ofNullable((OrderRpc)Router.getService(OrderRpc.class, "pear")).ifPresent(rpc -> rpc.makeOrder("9998877"));
         Optional.ofNullable(Router.getService(LoginRpc.class)).ifPresent(loginRpc ->
                 loginRpc.login(new LoginRpc.LoginCallback() {
                     @Override
