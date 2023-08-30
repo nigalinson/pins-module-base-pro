@@ -4,7 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import com.sloth.functions.http.API;
+import com.sloth.functions.api.API;
 import com.sloth.functions.http.DefaultApiModule;
 import com.sloth.platform.ComponentTypes;
 import com.sloth.platform.Platform;
@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         ).toJson(apple);
         System.out.println("json2:" + json2);
 
-        ApiStore apiStore = API.getInstance().create(new DefaultApiModule("http://api.rongyiguang.com/"), ApiStore.class);
+        TimeApiStore timeApiStore = API.getInstance().create(new DefaultApiModule("http://api.rongyiguang.com/"), TimeApiStore.class);
 
-        Rx.delegate(apiStore.getServerTime(String.valueOf(System.currentTimeMillis()))).ui().execute(new Obx<Object>() {
+        Rx.delegate(timeApiStore.getServerTime(String.valueOf(System.currentTimeMillis()))).ui().execute(new Obx<Object>() {
             @Override
             protected void onExe(Object o) {
                 super.onExe(o);
