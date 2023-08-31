@@ -1,22 +1,23 @@
 package com.sloth.pontus;
 
+import com.sloth.platform.ResourceManagerComponent;
 import com.sloth.pontus.listener.ResourceListenerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PontusBatch {
+public class PontusBatch implements ResourceManagerComponent.Batch {
 
     private final AtomicInteger count;
     private final List<String> urls;
     private final List<String> locals;
     private final List<String> md5s;
     private final List<String> ready;
-    private PontusBatchListener listener;
+    private ResourceManagerComponent.BatchListener listener;
 
     private Pontus owner;
 
-    public PontusBatch(List<String> urls, List<String> locals, List<String> md5s, PontusBatchListener listener) {
+    public PontusBatch(List<String> urls, List<String> locals, List<String> md5s, ResourceManagerComponent.BatchListener listener) {
         this.urls = urls;
         this.locals = locals;
         this.md5s = md5s;
@@ -25,13 +26,13 @@ public class PontusBatch {
         this.ready = new ArrayList<>();
     }
 
-    public void by(Pontus pontus){
+    public PontusBatch by(Pontus pontus){
         this.owner = pontus;
         if(urls == null || urls.isEmpty()){
             if(listener != null){
                 listener.onMultiResult(ready);
             }
-            return;
+            return this;
         }
 
         for(int i = 0; i < urls.size(); ++i){
@@ -61,11 +62,13 @@ public class PontusBatch {
                 }
             });
         }
+        return this;
     }
 
     /**
      * 终止下载，并取消旗监听
      */
+    @Override
     public void cancel(){
         if(owner != null && urls.size() > 0){
             for(String url: urls){
@@ -80,13 +83,11 @@ public class PontusBatch {
      * 取消监听(会继续下载+回调就绪状态)，不回调外部监听
      *
      */
+    @Override
     public void detach(){
         owner = null;
         listener = null;
     }
 
-    public interface PontusBatchListener {
-        void onMultiResult(List<String> ready);
-    }
 
 }

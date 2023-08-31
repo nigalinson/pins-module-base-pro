@@ -8,6 +8,8 @@ import com.sloth.pontus.entity.ResourceEntity;
 import com.sloth.pontus.entity.ResourceState;
 import com.sloth.pontus.listener.DatabaseListener;
 import com.sloth.pontus.worker.DownloadWorker;
+import com.sloth.utils.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -68,27 +70,38 @@ public class Pontus implements ResourceManagerComponent, DownloadWorker.WorkCall
     }
 
     @Override
-    public void submit(Request request) {
-        resourceDB.getAndCreateIfNotExist(request.url(), request.path(), request.md5(),
-                request.group(), request.additionInfo(), request.maxHotness(), new DatabaseListener() {
-            @Override
-            public void querySuccess(ResourceEntity resourceEntity) {
-                request.setId(resourceEntity.getId());
-                addIntoIdListener(resourceEntity.getId(), request.getListener());
-                if(resourceEntity.getState() == ResourceState.STATE_READY){
-                    notifySuccess(resourceEntity.getId(), resourceEntity.getOriginUrl(), resourceEntity.getLocalPath());
-                }else{
-                    downloadWorker.enqueue(resourceEntity.getId(), resourceEntity.getOriginUrl(), resourceEntity.getLocalPath(), resourceEntity.getMd5());
-                }
-            }
+    public Batch batch(List<String> urls, List<String> locals, List<String> md5, BatchListener listener) {
+        return new PontusBatch(urls, locals, md5, listener).by(this);
+    }
 
-            @Override
-            public void queryFailed(String errMsg) {
-                if(request.getListener() != null){
-                    request.getListener().onResourceFailed(-1L, request.url(), request.path(), errMsg);
-                }
-            }
-        });
+    @Override
+    public void submit(Request request) {
+        resourceDB.getAndCreateIfNotExist(
+                request.url(),
+                StringUtils.notTrimEmpty(request.path()) ? request.path() : PathTool.willPutinPath(resourceManagerConfig, request.url()),
+                request.md5(),
+                request.group(),
+                request.additionInfo(),
+                request.maxHotness(),
+                new DatabaseListener() {
+                    @Override
+                    public void querySuccess(ResourceEntity resourceEntity) {
+                        request.setId(resourceEntity.getId());
+                        addIntoIdListener(resourceEntity.getId(), request.getListener());
+                        if(resourceEntity.getState() == ResourceState.STATE_READY){
+                            notifySuccess(resourceEntity.getId(), resourceEntity.getOriginUrl(), resourceEntity.getLocalPath());
+                        }else{
+                            downloadWorker.enqueue(resourceEntity.getId(), resourceEntity.getOriginUrl(), resourceEntity.getLocalPath(), resourceEntity.getMd5());
+                        }
+                    }
+
+                    @Override
+                    public void queryFailed(String errMsg) {
+                        if(request.getListener() != null){
+                            request.getListener().onResourceFailed(-1L, request.url(), request.path(), errMsg);
+                        }
+                    }
+                });
     }
 
     /**

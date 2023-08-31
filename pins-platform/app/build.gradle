@@ -64,6 +64,7 @@ dependencies {
     implementation project(':p-player')
     implementation project(':p-fetch-download')
     implementation project(':p-rx')
+    implementation project(':p-pontus')
 
 }
 repositories {

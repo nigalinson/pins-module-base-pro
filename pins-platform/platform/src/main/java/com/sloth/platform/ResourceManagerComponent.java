@@ -12,6 +12,8 @@ public interface ResourceManagerComponent {
 
     Request get(String url);
 
+    Batch batch(List<String> urls, List<String> locals, List<String> md5, BatchListener listener);
+
     void submit(Request request);
 
     void queryUrl(String url, ResourceListener resourceListener);
@@ -133,6 +135,15 @@ public interface ResourceManagerComponent {
     interface ClearListener {
         void clearSuccess(int clearFileCounts);
         void clearFailed(String errMsg);
+    }
+
+    interface Batch {
+        void cancel();
+        void detach();
+    }
+
+    interface BatchListener {
+        void onMultiResult(List<String> ready);
     }
 
 }

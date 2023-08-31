@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.sloth.platform.Platform;
+import com.sloth.platform.ResourceManagerComponent;
 
 import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
@@ -84,7 +85,7 @@ public abstract class RSClearService extends Service {
 
                     @Override
                     public void onNext(@NonNull Long aLong) {
-                        Platform.resourceManager().clearUntil(willNotClearGroup());
+                        Platform.resourceManager().clearResource(buildClearRequest(),null);
                     }
 
                     @Override
@@ -95,6 +96,10 @@ public abstract class RSClearService extends Service {
                     @Override
                     public void onComplete() { }
                 });
+    }
+
+    private ResourceManagerComponent.ClearRequest buildClearRequest() {
+        return new PontusClearRequest();
     }
 
 }

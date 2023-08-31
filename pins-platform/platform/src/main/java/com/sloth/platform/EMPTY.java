@@ -329,6 +329,17 @@ public class EMPTY {
         }
 
         @Override
+        public Batch batch(List<String> urls, List<String> locals, List<String> md5, BatchListener listener) {
+            return new Batch() {
+                @Override
+                public void cancel() { }
+
+                @Override
+                public void detach() { }
+            };
+        }
+
+        @Override
         public void submit(Request request) {
 
         }

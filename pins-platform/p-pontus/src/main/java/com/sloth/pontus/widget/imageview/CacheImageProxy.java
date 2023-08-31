@@ -62,18 +62,7 @@ public abstract class CacheImageProxy {
             operatingUrl = null;
             if(localPath != null){
                 Platform.log().d(TAG, "resourceId: " + resourceId + ",localPath: " + localPath);
-                if(isSvg(localPath)){
-                    Platform.log().d(TAG, "加载类型：svg");
-                    try{
-                        if(live()){
-                            onLoadSvg(iv, localPath);
-                        }
-                    }catch (Exception e){
-                        if(live()){
-                            iv.setImageDrawable(ContextCompat.getDrawable(Utils.getApp(), errorDrawable()));
-                        }
-                    }
-                }else if(isGif(localPath)){
+                if(isGif(localPath)){
                     Platform.log().d(TAG, "加载类型：gif");
                     try{
                         if(live()){
@@ -181,10 +170,6 @@ public abstract class CacheImageProxy {
 
     protected abstract int errorDrawable();
 
-    protected void onLoadSvg(AppCompatImageView iv, String localPath){
-        //默认不实现SVG加载
-    }
-
     private Context getContext() {
         return iv != null ? iv.getContext() : null;
     }
@@ -236,15 +221,6 @@ public abstract class CacheImageProxy {
             return getActivity(((ContextWrapper)context).getBaseContext());
         }
         return null;
-    }
-
-    private boolean isSvg(String localPath) {
-        int index = localPath.lastIndexOf(".");
-        if(index != -1){
-            String suffix = localPath.substring(index);
-            return ".svg".equalsIgnoreCase(suffix);
-        }
-        return false;
     }
 
     private boolean isGif(String localPath) {

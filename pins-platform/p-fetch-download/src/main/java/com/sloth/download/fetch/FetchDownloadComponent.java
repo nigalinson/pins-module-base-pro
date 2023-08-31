@@ -62,11 +62,11 @@ public class FetchDownloadComponent implements DownloadComponent {
     private final FetchWatcher fetchWatcher;
     private final Handler handler;
 
-    private FetchDownloadComponent() {
+    public FetchDownloadComponent() {
         this(new Builder());
     }
 
-    private FetchDownloadComponent(Builder builder) {
+    public FetchDownloadComponent(Builder builder) {
         FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(Utils.getApp())
                 .setDownloadConcurrentLimit(builder.getConcurrency())
                 .build();

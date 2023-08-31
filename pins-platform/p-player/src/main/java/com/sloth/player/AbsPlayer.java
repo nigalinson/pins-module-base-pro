@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import com.annimon.stream.Stream;
+import com.bumptech.glide.Glide;
 import com.sloth.platform.Platform;
 import com.sloth.platform.PlayerComponent;
 import com.sloth.utils.FileUtils;
@@ -250,7 +251,7 @@ abstract class AbsPlayer<Codec extends com.sloth.player.Codec<?>, PlayerView ext
             }
             if(!coverImagePath.equals(showingPreviewUrl)){
                 showingPreviewUrl = coverImagePath;
-                Platform.imageLoader().with(preView.getContext()).loadLocal(coverImagePath).into(preView);
+                Glide.with(preView.getContext()).load(coverImagePath).into(preView);
             }
         }else{
             //清空预览图
@@ -286,7 +287,7 @@ abstract class AbsPlayer<Codec extends com.sloth.player.Codec<?>, PlayerView ext
             if(preView.getVisibility() != View.VISIBLE){
                 preView.setVisibility(View.VISIBLE);
             }
-            Platform.imageLoader().with(preView.getContext()).load(coverImageResPath).into(preView);
+            Glide.with(preView.getContext()).load(coverImageResPath).into(preView);
         }else{
             //清空预览图
             Platform.log().d(TAG, "释放预览图内存");
