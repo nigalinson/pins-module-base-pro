@@ -17,6 +17,8 @@ public abstract class Obx<T> implements Observer<T> {
         onExe(t);
     }
 
+    protected void onExe(T t) { }
+
     @Override
     public void onError(Throwable e) {
         if (this.disposable != null) {
@@ -32,8 +34,6 @@ public abstract class Obx<T> implements Observer<T> {
             disposable = null;
         }
     }
-
-    protected void onExe(T t) { }
 
     protected void onUnSubscribe(Disposable disposable) { }
 

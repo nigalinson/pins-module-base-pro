@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.sloth.functions.api.API;
-import com.sloth.functions.http.DefaultApiModule;
+import com.sloth.functions.api.DefaultApiConfig;
 import com.sloth.platform.ComponentTypes;
 import com.sloth.platform.Platform;
 import com.sloth.rx.Obx;
 import com.sloth.rx.Rx;
+import com.sloth.utils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,16 +32,18 @@ public class MainActivity extends AppCompatActivity {
         ).toJson(apple);
         System.out.println("json2:" + json2);
 
-        TimeApiStore timeApiStore = API.getInstance().create(new DefaultApiModule("http://api.rongyiguang.com/"), TimeApiStore.class);
+        API.getInstance().create(new DefaultApiConfig("http://api.rongyiguang.com/"), TimeApiStore.class);
 
-        Rx.delegate(timeApiStore.getServerTime(String.valueOf(System.currentTimeMillis()))).ui().execute(new Obx<Object>() {
-            @Override
-            protected void onExe(Object o) {
-                super.onExe(o);
-                Platform.log().d("result", Platform.json().toJson(o));
-            }
-        });
-
+        Rx.delegate(TimeApiStore.class)
+                .run(it -> it.getServerTime(System.currentTimeMillis() + ""))
+                .ui()
+                .execute(new Obx<Object>() {
+                    @Override
+                    protected void onExe(Object o) {
+                        super.onExe(o);
+                        ToastUtils.showShort(Platform.json().toJson(o));
+                    }
+                });
     }
 
     public static final class Apple {

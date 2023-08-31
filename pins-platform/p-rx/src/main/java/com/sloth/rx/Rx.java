@@ -1,5 +1,6 @@
 package com.sloth.rx;
 
+import com.sloth.functions.api.API;
 import com.sloth.platform.constants.Constants;
 import com.sloth.platform.Platform;
 import com.sloth.utils.NetworkUtils;
@@ -186,6 +187,26 @@ public class Rx {
      */
     public static Chain delegate(Observable observable){
         return new Chain(observable);
+    }
+
+    public static final class StoreProxy<A> {
+        private final A store;
+
+        public StoreProxy(Class<A> clz) {
+            this.store = API.getInstance().create(clz);
+        }
+
+        public <T> Chain run(ApiObservableCreator<A, T> apiObservableCreator){
+            return new Chain(apiObservableCreator.create(store));
+        }
+    }
+
+    public interface ApiObservableCreator<A, T> {
+        Observable<T> create(A store);
+    }
+
+    public static <A> StoreProxy<A> delegate(Class<A> store){
+        return new StoreProxy<A>(store);
     }
 
     public static class Chain {

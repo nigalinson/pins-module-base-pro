@@ -1,9 +1,7 @@
 package com.sloth.platform;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.widget.ImageView;
 import com.sloth.functions.json.gson.GsonComponent;
 import com.sloth.functions.log.logcat.LogcatComponent;
 
@@ -12,93 +10,10 @@ import java.util.List;
 public class EMPTY {
 
     static final LogComponent LOG = new LogcatComponent();
-    static final ImageLoaderComponent IMAGE = new EmptyImageLoader();
     static final PlayerComponent PLAYER = new EmptyPlayer();
     static final DownloadComponent DOWNLOADER = new EmptyDownloader();
     static final GsonComponent JSON = new GsonComponent();
-
-    static final class EmptyImageLoader implements ImageLoaderComponent {
-
-        static final class EmptyRq implements Rq {
-            @Override
-            public void cancel() { }
-        }
-
-        @Override
-        public ImageLoaderComponent with(Context context) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent load(String url) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent load(int res) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent loadLocal(String localPath) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent load(Uri uri) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent placeHolder(int resId) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent error(int resId) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent transition(Object transition) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent transform(Object transform) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent skipMemoryCache(boolean skipMemoryCache) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent diskStrategy(Object diskStrategy) {
-            return this;
-        }
-
-        @Override
-        public ImageLoaderComponent apply(Object requestOptions) {
-            return this;
-        }
-
-        @Override
-        public <T> ImageLoaderComponent listener(LoadListener<T> loadListener) {
-            return this;
-        }
-
-        @Override
-        public Rq into(ImageView imageView) {
-            return new EmptyRq();
-        }
-
-        @Override
-        public <T> Rq into(LoadTarget<T> loadTarget) {
-            return new EmptyRq();
-        }
-    }
+    static final ResourceManagerComponent RESOURCE_MANAGER = new EmptyResourceManager();
 
     static final class EmptyPlayer implements PlayerComponent {
 
@@ -299,6 +214,167 @@ public class EMPTY {
 
         @Override
         public void destroy() {
+
+        }
+    }
+
+    static final class EmptyResourceManager implements ResourceManagerComponent {
+
+        static final class EmptyRequest implements Request {
+
+            @Override
+            public Request setPath(String path) {
+                return null;
+            }
+
+            @Override
+            public Request setMd5(String md5) {
+                return null;
+            }
+
+            @Override
+            public Request setGroup(String group) {
+                return null;
+            }
+
+            @Override
+            public Request setAdditionInfo(String additionInfo) {
+                return null;
+            }
+
+            @Override
+            public Request setMaxHotness(boolean maxHotness) {
+                return null;
+            }
+
+            @Override
+            public Request submit(ResourceListener resourceListener) {
+                return null;
+            }
+
+            @Override
+            public void setId(Long id) {
+
+            }
+
+            @Override
+            public Long getId() {
+                return null;
+            }
+
+            @Override
+            public String url() {
+                return null;
+            }
+
+            @Override
+            public String path() {
+                return null;
+            }
+
+            @Override
+            public String md5() {
+                return null;
+            }
+
+            @Override
+            public String group() {
+                return null;
+            }
+
+            @Override
+            public String additionInfo() {
+                return null;
+            }
+
+            @Override
+            public boolean maxHotness() {
+                return false;
+            }
+
+            @Override
+            public ResourceListener getListener() {
+                return null;
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+
+            @Override
+            public void detach() {
+
+            }
+        }
+
+        @Override
+        public void addGlobalListener(ResourceListener resourceListener) {
+
+        }
+
+        @Override
+        public void removeGlobalListener(ResourceListener resourceListener) {
+
+        }
+
+        @Override
+        public void clearGlobalListener() {
+
+        }
+
+        @Override
+        public Request get(String url) {
+            return new EmptyRequest();
+        }
+
+        @Override
+        public void submit(Request request) {
+
+        }
+
+        @Override
+        public void queryUrl(String url, ResourceListener resourceListener) {
+
+        }
+
+        @Override
+        public void cancel(String url) {
+
+        }
+
+        @Override
+        public void cancelLocalPath(String localName) {
+
+        }
+
+        @Override
+        public void cancelAll() {
+
+        }
+
+        @Override
+        public void removeAllListeners() {
+
+        }
+
+        @Override
+        public void removeListener(ResourceListener resourceListener) {
+
+        }
+
+        @Override
+        public void removeListeners(Long id) {
+
+        }
+
+        @Override
+        public void clearResource(ClearRequest clearRequest, ClearListener clearListener) {
+
+        }
+
+        @Override
+        public void close() {
 
         }
     }

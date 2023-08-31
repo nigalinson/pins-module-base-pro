@@ -4,9 +4,9 @@ public interface PlatformConfig {
 
     String logComponent();
     String jsonComponent();
-    String imageLoaderComponent();
     String playerComponent();
     String downloaderComponent();
+    String resourceManagerComponent();
 
     class Default implements PlatformConfig {
 
@@ -21,11 +21,6 @@ public interface PlatformConfig {
         }
 
         @Override
-        public String imageLoaderComponent() {
-            return ComponentTypes.ImageLoader.GLIDE;
-        }
-
-        @Override
         public String playerComponent() {
             return ComponentTypes.Player.NATIVE_SURFACE;
         }
@@ -33,6 +28,11 @@ public interface PlatformConfig {
         @Override
         public String downloaderComponent() {
             return ComponentTypes.Downloader.FETCH;
+        }
+
+        @Override
+        public String resourceManagerComponent() {
+            return ComponentTypes.ResourceManager.DEFAULT;
         }
 
     }

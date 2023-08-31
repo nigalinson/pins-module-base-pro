@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.library'
+    id 'org.greenrobot.greendao'
 }
 
 android {
@@ -9,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion Integer.parseInt(MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(TARGET_SDK_VERSION)
-        versionCode Integer.parseInt(PLATFORM_VERSION.replace('.',''))
-        versionName PLATFORM_VERSION
+        versionCode Integer.parseInt(P_PONTUS_VERSION.replace('.',''))
+        versionName P_PONTUS_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -33,40 +34,28 @@ android {
 
     sourceSets {
         main {
-            def dirs = ['main', 'constants', 'utils', 'functions', 'widget']
+            def dirs = ['main']
             dirs.each { dir ->
                 java.srcDir("src/$dir/java")
                 res.srcDir("src/$dir/res")
             }
         }
     }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.sloth.pontus.dao'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
-
     annotationProcessor thirdDependencies.wmRouterAnno
+    implementation thirdDependencies.wmRouter
+    implementation thirdDependencies.greendao
+    implementation project(':platform')
+    implementation project(':p-rx')
 
-    //inherit
-    api thirdDependencies.appCompat
-    api thirdDependencies.design
-    api thirdDependencies.constraintlayout
-    api thirdDependencies.wmRouter
-    api thirdDependencies.multidex
-    api thirdDependencies.gson
-    api thirdDependencies.glide
-    api thirdDependencies.lifecycle
-    api thirdDependencies.stream
-    api thirdDependencies.logger
-    api thirdDependencies.retrofit
-    api thirdDependencies.converterGson
-    api thirdDependencies.adapterRxjava2
-    api thirdDependencies.okhttp
-    api thirdDependencies.okhttplog
-    api thirdDependencies.rxJava2
-    api thirdDependencies.rxAndroid2
-}
-repositories {
-    mavenCentral()
 }
 
 apply from: 'push_maven.gradle'

@@ -68,18 +68,6 @@ public class Platform {
         return getComponentOrDefault(LogComponent.class, key, null, PlatformConfig::logComponent, EMPTY.LOG, bClz, bObj);
     }
 
-    public static ImageLoaderComponent imageLoader(){
-        return imageLoader(null);
-    }
-
-    public static ImageLoaderComponent imageLoader(String key){
-        return imageLoader(key, null, null);
-    }
-
-    public static <B> ImageLoaderComponent imageLoader(String key, Class<B> bClz, Object bObj){
-        return getComponentOrDefault(ImageLoaderComponent.class, key, null, PlatformConfig::imageLoaderComponent, EMPTY.IMAGE, bClz, bObj);
-    }
-
     public static PlayerComponent player(Context ctx){
         return player(null, ctx);
     }
@@ -114,6 +102,18 @@ public class Platform {
 
     public static <B> JsonComponent json(String key, Class<B> bClz, Object bObj){
         return getComponentOrDefault(JsonComponent.class, key, null, PlatformConfig::jsonComponent, EMPTY.JSON, bClz, bObj);
+    }
+
+    public static ResourceManagerComponent resourceManager(){
+        return resourceManager(null);
+    }
+
+    public static ResourceManagerComponent resourceManager(String key){
+        return resourceManager(key, null, null);
+    }
+
+    public static <B> ResourceManagerComponent resourceManager(String key, Class<B> bClz, Object bObj){
+        return getComponentOrDefault(ResourceManagerComponent.class, key, null, PlatformConfig::resourceManagerComponent, EMPTY.RESOURCE_MANAGER, bClz, bObj);
     }
 
     public static <C> Optional<C> service(Class<C> clz){

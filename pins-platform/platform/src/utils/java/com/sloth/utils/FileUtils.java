@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.StatFs;
 import android.text.TextUtils;
 
+import com.sloth.platform.constants.Constants;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileFilter;
@@ -1444,6 +1446,65 @@ public final class FileUtils {
 
     public interface OnReplaceListener {
         boolean onReplace(File srcFile, File destFile);
+    }
+
+    /**
+     * 根据名称预测文件类型
+     * @param fileName 文件名
+     * @return FileType文件类型枚举
+     */
+    public static Constants.FileType predictFileType(String fileName){
+        if(StringUtils.isTrimEmpty(fileName)) return Constants.FileType.UNKNOWN;
+        for(Constants.FileType fileType: Constants.FileType.values()){
+            if(isFileType(fileName, fileType)) return fileType;
+        }
+        return Constants.FileType.UNKNOWN;
+    }
+
+    /**
+     * 文件名是否视频文件
+     * @param url 文件名
+     * @return 是否
+     */
+    public static boolean isVideoFile(String url) {
+        return isFileType(url, Constants.FileType.VIDEO);
+    }
+
+    /**
+     * 文件名是否图片文件
+     * @param url 文件名
+     * @return 是否
+     */
+    public static boolean isImageFile(String url) {
+        return isFileType(url, Constants.FileType.IMAGE);
+    }
+
+    /**
+     * 文件名是否音频文件
+     * @param url 文件名
+     * @return 是否
+     */
+    public static boolean isMusicFile(String url) {
+        return isFileType(url, Constants.FileType.MUSIC);
+    }
+
+    private static boolean isFileType(String url, Constants.FileType fileType) {
+        if (StringUtils.notTrimEmpty(url)) {
+            int sufIndex = url.lastIndexOf(".");
+            if (sufIndex != -1) {
+                String suffix = url.substring(sufIndex);
+                String[] var2 = fileType.suffix;
+                int var3 = fileType.suffix.length;
+
+                for (int var4 = 0; var4 < var3; ++var4) {
+                    String line = var2[var4];
+                    if (suffix.equalsIgnoreCase(line)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

@@ -272,4 +272,29 @@ public interface Constants {
         String FILE = "multipart/form-data";
     }
 
+    enum FileType {
+        IMAGE(10, "image", new String[]{".png", ".bmp", ".jpg", ".jpeg", ".gif"}),
+        MUSIC(20, "image", new String[]{".mp3", ".wav", ".pcm"}),
+        VIDEO(30, "video", new String[]{".mp4", ".avi", ".flv", ".mov", ".rmvb", ".3pg", ".rm", ".rtsp", ".rtmp", ".qt", ".asf", ".mpeg", ".mpg"}),
+        ZIP(40, "zip", new String[]{".zip", ".7z", ".rar"}),
+        DOC(50, "doc", new String[]{".doc", ".docx"}),
+        TXT(60, "txt", new String[]{".txt", ".json", ".md"}),
+        PDF(70, "pdf", new String[]{".pdf"}),
+        HTML(80, "html", new String[]{".html"}),
+        JAR(90, "jar", new String[]{".jar"}),
+        DEX(100, "dex", new String[]{".dex"}),
+        UNKNOWN(110, "*", new String[]{".*"}),
+        ;
+        public int code;
+        public String name;
+        public String[] suffix;
+
+        FileType(int code, String name, String[] suffix) {
+            this.code = code;
+            this.name = name;
+            this.suffix = suffix;
+        }
+
+    }
+
 }

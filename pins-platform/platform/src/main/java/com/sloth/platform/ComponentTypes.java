@@ -8,10 +8,6 @@ public class ComponentTypes {
         String X_LOG = "log_component_xlog";
     }
 
-    public @interface ImageLoader {
-        String GLIDE = "image_loader_component_glide";
-    }
-
     public @interface Player {
         String NATIVE_SURFACE = "player_component_native_surface";
         String NATIVE_TEXTURE = "player_component_native_texture";
@@ -25,7 +21,11 @@ public class ComponentTypes {
     }
 
     public @interface JSON_SERIALIZE {
-        String GSON = "json_serialize_gson";
+        String GSON = "json_serialize_component_gson";
+    }
+
+    public @interface ResourceManager {
+        String DEFAULT = "resource_manager_component_default";
     }
 
 }
