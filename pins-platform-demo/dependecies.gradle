@@ -27,28 +27,9 @@ ext {
     ]
 
     ryDependencies = [
-            common           : "com.rongyi.common:common:4.1.39-SNAPSHOT",
-            socket           : "com.rongyi.socketlibrary:socket:4.0.03-SNAPSHOT",
-            advertisement    : "com.rongyi.advertisement:advertisement:4.0.06-SNAPSHOT",
-            report           : "com.rongyi.report:report:4.0.03-SNAPSHOT",
-            socketCmd        : "com.rongyi.socketcmd:socketcmd:4.0.03-SNAPSHOT",
-            recognize        : "com.rongyi.recognizelib:recognizelib:4.0.02-SNAPSHOT",
-            game             : "com.rongyi.game:gamelib:4.0.01-SNAPSHOT",
-            box              : "com.rongyi.boxlib:boxlib:4.2.03-SNAPSHOT",
-            sceneSwitcher    : "com.rongyi.sceneswitcher:sceneswitcher:0.00.01-SNAPSHOT"
     ]
 
     ryDependenciesSnapshot = [
-            common           : "com.rongyi.common:common:4.3.23-SNAPSHOT",
-            socket           : "com.rongyi.socketlibrary:socket:4.0.33-SNAPSHOT",
-            report           : "com.rongyi.report:report:4.0.28-SNAPSHOT",
-            socketCmd        : "com.rongyi.socketcmd:socketcmd:4.0.27-SNAPSHOT",
-            recognize        : "com.rongyi.recognizelib:recognizelib:4.0.25-SNAPSHOT",
-            game             : "com.rongyi.game:gamelib:4.0.01-SNAPSHOT",
-            box              : "com.rongyi.boxlib:boxlib:4.3.32-SNAPSHOT",
-            advertisement    : "com.rongyi.advertisement:advertisement:4.0.23-SNAPSHOT",
-            videoSync        : "com.rongyi.videosync:videosync:1.02.40-SNAPSHOT",
-            sceneSwitcher    : "com.rongyi.sceneswitcher:sceneswitcher:0.00.03-SNAPSHOT"
     ]
 
     //Third Libraries dependencies
